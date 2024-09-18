@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
-class MainController extends GetxController {
-  // @override
-  // void onInit() async {
-  //   await getUserLocation();
-  //   // currentWeatherData = getCurrentWeather(latitude.value, longitude.value);
-  //   // hourlyWeatherData = getHourlyWeather(latitude.value, longitude.value);
+import '../services/api_services.dart';
 
-  //   super.onInit();
-  // }
+class MainController extends GetxController {
+  @override
+  void onInit() async {
+    await getUserLocation();
+    currentWeatherData = getCurrentWeather(latitude.value, longitude.value);
+    // hourlyWeatherData = getHourlyWeather(latitude.value, longitude.value);
+
+    super.onInit();
+  }
 
   var isDark = false.obs;
   dynamic currentWeatherData;

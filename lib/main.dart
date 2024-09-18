@@ -7,6 +7,7 @@ import 'package:weather_info/consts/images.dart';
 import 'package:weather_info/consts/strings.dart';
 import 'package:weather_info/controllers/main_controller.dart';
 import 'package:weather_info/models/current_weather_model.dart';
+import 'package:weather_info/services/api_services.dart';
 
 import 'consts/colors.dart';
 import 'utils/our_themes.dart';
@@ -64,7 +65,11 @@ class WeatherInfo extends StatelessWidget {
       ),
       body: Container(
           padding: EdgeInsets.all(12),
-          child: SingleChildScrollView(
+          child:FutureBuilder(
+            future: controller.currentWeatherData, 
+            builder: (BuildContext context, AsyncSnapshot snapshot){
+             if(snapshot.hasData){
+              return SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,7 +238,12 @@ class WeatherInfo extends StatelessWidget {
                     })
               ],
             ),
-          )),
-    );
+          );
+             }
+           else{
+            return Center(child: CircularProgressIndicator(),);
+           }   
+            })
+    ));
   }
 }
