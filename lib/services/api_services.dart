@@ -7,22 +7,30 @@ import 'package:weather_info/consts/strings.dart';
 import 'package:weather_info/models/current_weather_model.dart';
 import 'package:weather_info/models/hourly_weather_model.dart';
 
-getCurrentWeather(lat, long) async {
-  var link = "https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$langitude&appid=$ApiKey&units=metric";
+
+
+ var hourlylink = "https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$langitude&appid=$ApiKey&units=metric";
+
+
+
+
+getCurrentWeather(lat, lang) async {
+  var link = "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lang&appid=$ApiKey&units=metric";
   var res = await http.get(Uri.parse(link));
   if (res.statusCode == 200) {
     var data = currentWeatherDataFromJson(res.body.toString());
+print("data is recieved ");
+    return data;
+  }   
+}
 
+getHourlyWeather(lat, lang) async {
+  var link = "https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lang&appid=$ApiKey&units=metric";
+  var res = await http.get(Uri.parse(link));
+  if (res.statusCode == 200) {
+   
+   var data = hourlyWeatherDataFromJson(res.body.toString());
+print("hourly weather updated");
     return data;
   }
 }
-
-// getHourlyWeather(lat, long) async {
-//   var link = "https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$long&appid=$apiKey&units=metric";
-//   var res = await http.get(Uri.parse(link));
-//   if (res.statusCode == 200) {
-//     var data = hourlyWeatherDataFromJson(res.body.toString());
-
-//     return data;
-//   }
-// }

@@ -1,16 +1,18 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:weather_info/models/current_weather_model.dart';
+import 'package:weather_info/services/api_services.dart';
 
-import '../services/api_services.dart';
 
 class MainController extends GetxController {
   @override
   void onInit() async {
     await getUserLocation();
     currentWeatherData = getCurrentWeather(latitude.value, longitude.value);
-    // hourlyWeatherData = getHourlyWeather(latitude.value, longitude.value);
+    hourlyWeatherData = getHourlyWeather(latitude.value, longitude.value);
 
     super.onInit();
   }
