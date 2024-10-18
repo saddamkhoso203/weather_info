@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:weather_info/models/current_weather_model.dart';
+// import 'package:weather_info/models/current_weather_model.dart';
 import 'package:weather_info/services/api_services.dart';
 
 
@@ -49,6 +49,7 @@ class MainController extends GetxController {
       }
     }
 
+    // ignore: deprecated_member_use
     return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high).then((value) {
       latitude.value = value.latitude;
       longitude.value = value.longitude;

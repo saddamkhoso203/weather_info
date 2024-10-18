@@ -1,7 +1,4 @@
-// import 'package:demo_application/models/current_weather_model.dart';
-// import 'package:demo_application/models/hourly_weather_model.dart';
 
-// import '../consts/strings.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_info/consts/strings.dart';
 import 'package:weather_info/models/current_weather_model.dart';
@@ -19,7 +16,6 @@ getCurrentWeather(lat, lang) async {
   var res = await http.get(Uri.parse(link));
   if (res.statusCode == 200) {
     var data = currentWeatherDataFromJson(res.body.toString());
-print("data is recieved ");
     return data;
   }   
 }
@@ -30,7 +26,6 @@ getHourlyWeather(lat, lang) async {
   if (res.statusCode == 200) {
    
    var data = hourlyWeatherDataFromJson(res.body.toString());
-print("hourly weather updated");
     return data;
   }
 }

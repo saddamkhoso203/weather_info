@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -7,12 +9,11 @@ import 'package:weather_info/consts/images.dart';
 import 'package:weather_info/consts/strings.dart';
 import 'package:weather_info/controllers/main_controller.dart';
 import 'package:weather_info/models/current_weather_model.dart';
-import 'package:weather_info/models/current_weather_model.dart';
-import 'package:weather_info/models/hourly_weather_model.dart';
-import 'package:weather_info/services/api_services.dart';
 
-import 'consts/colors.dart';
-import 'models/current_weather_model.dart';
+import 'package:weather_info/models/hourly_weather_model.dart';
+
+
+
 import 'utils/our_themes.dart';
 
 void main() {
@@ -73,14 +74,14 @@ class WeatherInfo extends StatelessWidget {
         body: Obx(()=>
         controller.isloaded.value == true ?
            Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: FutureBuilder(
                   future: controller.currentWeatherData,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       CurrentWeatherData data = snapshot.data;
                       return SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -147,6 +148,7 @@ class WeatherInfo extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: List.generate(3, (index) {
+                                // ignore: non_constant_identifier_names
                                 var IconsList = [clouds, humidity, windspeed];
                                 var values = [
                                   "${data.clouds!.all}",
@@ -163,16 +165,16 @@ class WeatherInfo extends StatelessWidget {
                                         .box
                                         .gray200
                                         .roundedSM
-                                        .padding(EdgeInsets.all(8))
+                                        .padding(const EdgeInsets.all(8))
                                         .make(),
                                     10.heightBox,
-                                    "${values[index]}".text.gray400.make(),
+                                    values[index].text.gray400.make(),
                                   ],
                                 );
                               }),
                             ),
                             10.heightBox,
-                            Divider(),
+                            const Divider(),
                             10.heightBox,
                             FutureBuilder(
                                 future: controller.hourlyWeatherData,
@@ -184,7 +186,7 @@ class WeatherInfo extends StatelessWidget {
                                     return SizedBox(
                                       height: 160,
                                       child: ListView.builder(
-                                        physics: BouncingScrollPhysics(),
+                                        physics: const BouncingScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
                                         itemCount: hourlyData.list!.length > 6
@@ -198,8 +200,8 @@ class WeatherInfo extends StatelessWidget {
                                                       .toInt()* 1000));
           
                                           return Container(
-                                            padding: EdgeInsets.all(8),
-                                            margin: EdgeInsets.only(right: 4),
+                                            padding: const EdgeInsets.all(8),
+                                            margin: const EdgeInsets.only(right: 4),
                                             decoration: BoxDecoration(
                                                 color: cardColor,
                                                 borderRadius:
@@ -222,12 +224,12 @@ class WeatherInfo extends StatelessWidget {
                                       ),
                                     );
                                   }
-                                  return Center(
+                                  return const Center(
                                     child: CircularProgressIndicator(),
                                   );
                                 }),
                             10.heightBox,
-                            Divider(),
+                            const Divider(),
                             10.heightBox,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,7 +256,7 @@ class WeatherInfo extends StatelessWidget {
                                   return Card(
                                     color: theme.cardColor,
                                     child: Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 8, vertical: 12),
                                       child: Row(
                                         mainAxisAlignment:
@@ -301,12 +303,12 @@ class WeatherInfo extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
                   }))
-                  : Center(
+                  : const Center(
                     child: CircularProgressIndicator(),
                   ),
         ));
